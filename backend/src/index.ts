@@ -1,9 +1,14 @@
 
+// import { Hono } from "hono";
+// import { serve } from "@hono/node-server";
+// import { cors } from "hono/cors";
+// import { logger } from "hono/logger";
+// import { randomUUID } from "node:crypto";
+
+
 import { Hono } from "hono";
-import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { randomUUID } from "node:crypto";
 
 // ----------------------------------
 // 1. INITIALIZE APPLICATION
@@ -18,7 +23,12 @@ app.use("*", logger());
 app.use(
   "*",
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://mallikapathak.co.in",
+      "https://www.mallikapathak.co.in",
+    ],
   })
 );
 
@@ -148,7 +158,7 @@ app.post("/api/tasks", async (c) => {
   const timestamp = new Date().toISOString();
 
   const newTask: Task = {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     title: payload.title.trim(),
     description:
       typeof payload.description === "string"
@@ -326,9 +336,11 @@ app.get("/", (c) => {
 // });
 
 // 5. Start server
-serve({
-  fetch: app.fetch,
-  port: 4000,
-});
+// serve({
+//   fetch: app.fetch,
+//   port: 4000,
+// });
 
-console.log("Server running on http://localhost:4000"); //The statement is executing in node.js backend terminal not in the browser's console
+// console.log("Server running on http://localhost:4000"); //The statement is executing in node.js backend terminal not in the browser's console
+
+export default app;

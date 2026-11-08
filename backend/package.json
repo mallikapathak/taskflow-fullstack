@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-     "dev": "tsx watch src/index.ts"
-  },
+  "dev": "wrangler dev",
+  "deploy": "wrangler deploy",
+  "typegen": "wrangler types"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,7 +14,8 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "wrangler": "^4.158.0"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.6",
